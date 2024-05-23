@@ -1,11 +1,13 @@
 <template>
     <v-card>
       <v-card-title>
-        BSIT3A
+       STUDENT INFORMATION
         <v-spacer></v-spacer>
         <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
       </v-card-title>
-      <v-data-table :headers="headers" :items="StudentData" :search="search">
+      <v-data-table :headers="headers" 
+      :items="StudentData" 
+      :search="search">
         <template slot="item.actions" slot-scope="{item}">
           <v-btn dark color="#43A047"><v-icon left>mdi-eye</v-icon> VIEW</v-btn>
           <v-btn dark color="#01579B"><v-icon left>mdi-pencil</v-icon> EDIT</v-btn>
@@ -23,44 +25,42 @@
         search: '',
         headers: [
           {
-            text: 'ID',
+            text: 'Student#',
             align: 'start',
             sortable: false,
-            value: 'StudentID',
+            value: 'attributes.student_no',
           },
-          { text: 'FirtsName', value: 'Firts_Name' },
-          { text: 'LastName', value: 'Last_Name' },
-          { text: 'MiddleName', value: 'Middle_Name' },
-          { text: 'Course', value: 'Course' },
-          { text: 'Year', value: 'Year' },
+          { text: 'LastName', value: 'attributes.last_name' },
+          { text: 'MiddleName', value: 'attributes.middle_name' },
+          { text: 'FirtsName', value: 'attributes.first_name' },
+          { text: 'Course', value: 'attributes.course' },
+          { text: 'Section', value: 'attributes.section' },
+          { text: 'Address', value: 'attributes.address' },
           { text: '', value: "actions" }
         ],
         StudentData: [
-          {
-            
-            StudentID: '21-00104',
-            Firts_Name: 'Christian',
-            Last_Name: 'Salvador',
-            Middle_Name: 'Demakiling',
-            Course: 'BSIT',
-            Year: '3rd',
-          },
-          {
-            
-            StudentID: '21-00104',
-            Firts_Name: 'Christian',
-            Last_Name: 'Salvador',
-            Middle_Name: 'Demakiling',
-            Course: 'BSIT',
-            Year: '3rd',
-          },
-          
-  
-  
+
         ],
       }
     },
-  }
+
+methods:{
+  getStudentData() {
+          this.$axios
+            .get("http://localhost:1337/api/student-infos")
+            .then((response) => {
+              console.log(response.data.data);
+              this.StudentData = response.data.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        },
+},
+mounted(){
+  this.getStudentData();
+},
+  };
   </script>
   
   
@@ -178,9 +178,9 @@
       },
     
       methods: {
-        getInmateData() {
+        get(dataname)() {
           this.$axios
-            .get("/api/inmate-infos")
+            .get("api")
             .then((response) => {
               console.log(response.data.data);
               this.info = response.data.data;

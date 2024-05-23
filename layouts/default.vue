@@ -94,7 +94,7 @@ export default {
         },
         {
           icon: "mdi-view-list",
-          title: "Student Info",
+          title: "Student List",
           to: "/studentinfo",
         },
 

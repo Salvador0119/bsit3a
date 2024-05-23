@@ -29,7 +29,7 @@
         <v-text-field outlined="15" v-model="password" :rules="passwordRules" label="Password" type="password" prepend-inner-icon="mdi-lock" required></v-text-field>
         <v-row align="center" justify="center">
           <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate" block>
-              SIGNIN
+              SIGN IN
             </v-btn>
 
       </v-row>
@@ -89,7 +89,7 @@ export default {
   flex-direction: column;
   height: 100%;
   width: 100%;
-  /* background-image: url(); */
+  background-image: url(assets\1338701.png); 
   background-size: cover;
   background-position: center;
   height: 100vh;
